@@ -39,12 +39,9 @@ img { max-width: 100%; display: block; }
 a { text-decoration: none; color: inherit; }
 ul { list-style: none; }
 
-/* ── TYPOGRAPHY ── */
-h1, h2, h3, h4 { font-family: var(--serif); font-weight: 600; line-height: 1.15; }
-
-/* ── VIBRANT GREEN GRADIENT (Ultra-Vivid Edition) ── */
+/* ── VIBRANT GREEN GRADIENT (Reference-Matched Edition) ── */
 .vibrant-gradient {
-  background: linear-gradient(90deg, #A8E063 0%, #10B981 50%, #059669 100%);
+  background: linear-gradient(90deg, #026105 10%, #FFFFFF 48%, #047D0A 69%, #66BB6A 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -54,11 +51,11 @@ h1, h2, h3, h4 { font-family: var(--serif); font-weight: 600; line-height: 1.15;
 }
 
 /* Elegant Cursive Taglines (Dancing Script) */
-.eyebrow, .hero-kicker, .hero-tagline, .logo-sub {
+.section-header .eyebrow, .hero-kicker {
   font-family: var(--cursive) !important;
   font-style: normal !important;
   font-weight: 600 !important;
-  font-size: 1.6rem !important;
+  font-size: 1.8rem !important;
   color: var(--vibrant-green);
   text-transform: none !important;
   letter-spacing: 0 !important;
@@ -66,16 +63,116 @@ h1, h2, h3, h4 { font-family: var(--serif); font-weight: 600; line-height: 1.15;
   display: block;
 }
 
-/* Attractive Uniform font (Poppins) for all h1, h2, h3 */
-h1, h2, h3, h4, .logo-name {
+/* Navbar Logo Subtitle — Must be smaller to not break layout */
+.logo-sub {
   font-family: var(--sans) !important;
+  font-size: 0.65rem !important;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  display: block;
+  margin-top: -2px;
+}
+
+/* Poppins for all primary headings */
+h1, h2, h3, h4, .logo-name {
+  font-family: 'Poppins', sans-serif !important;
   font-weight: 800 !important;
   font-style: normal !important;
   letter-spacing: -0.02em !important;
 }
 
-/* Default headings fallback */
-h1, h2, h3, h4 { color: var(--forest); }
+/* ── NAVBAR PERFECTION ── */
+.navbar {
+  position: fixed;
+  top: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 92%;
+  max-width: 1400px;
+  z-index: 1000;
+  background: rgba(10, 26, 18, 0.45);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 0.6rem 2rem;
+  border-radius: 100px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.45s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.navbar.scrolled {
+  top: 0.8rem;
+  width: 95%;
+  background: rgba(10, 26, 18, 0.96);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  padding: 0.5rem 2rem;
+}
+
+.nav-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.nav-links {
+  display: flex;
+  gap: clamp(0.8rem, 1.5vw, 2rem);
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-link {
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cream);
+  opacity: 0.85;
+  transition: all 0.3s;
+  position: relative;
+}
+
+.nav-link:hover { opacity: 1; color: var(--vibrant-green); }
+
+/* Logo internal alignment */
+.nav-logo { display: flex; align-items: center; gap: 0.8rem; }
+.logo-icon { color: var(--vibrant-green); }
+.logo-text { display: flex; flex-direction: column; line-height: 1.1; }
+.logo-name { font-size: 1.25rem !important; margin: 0; }
+.logo-sub { 
+  font-size: 0.62rem !important; 
+  color: var(--gold) !important; 
+  letter-spacing: 0.15em !important; 
+  opacity: 0.9;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-family: var(--sans) !important;
+}
+
+/* Navbar CTA button */
+.btn-contact {
+  background: var(--vibrant-green);
+  background: linear-gradient(90deg, #10B981, #059669);
+  color: #fff !important;
+  padding: 0.6rem 1.4rem;
+  border-radius: 50px;
+  font-weight: 800;
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  white-space: nowrap; /* CRITICAL: No wrapping */
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.2);
+}
+.btn-contact:hover { 
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+}
+
 h1 { font-size: clamp(3rem, 8vw, 7rem); }
 h2 { font-size: clamp(2rem, 4.5vw, 3.8rem); line-height: 1.2; }
 h3 { font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 500; }
