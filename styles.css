@@ -14,8 +14,9 @@
   --mid: #1a3022;
   --text: #2c1a0e;
   --text-lt: rgba(246,245,239,0.85);
-  --serif: 'Poppins', sans-serif;
+  --serif: 'Playfair Display', serif;
   --sans: 'Poppins', sans-serif;
+  --cursive: 'Dancing Script', cursive;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
@@ -41,25 +42,38 @@ ul { list-style: none; }
 /* ── TYPOGRAPHY ── */
 h1, h2, h3, h4 { font-family: var(--serif); font-weight: 600; line-height: 1.15; }
 
-/* ── 3-COLOR VIBRANT NATURE GRADIENT ── */
-.gradient-text {
-  background: linear-gradient(135deg, #A8E063 0%, #2E7D32 50%, #1D976C 100%);
+/* ── VIBRANT GREEN GRADIENT (Smarter Together Style) ── */
+.vibrant-gradient {
+  background: linear-gradient(90deg, #A8E063 0%, #56AB2F 45%, #10B981 100%);
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   background-clip: text;
+  -webkit-text-fill-color: transparent;
   color: transparent;
   font-weight: 800;
   display: inline-block;
 }
-/* Variant for dark backgrounds — more luminous */
-.gradient-text-light {
-  background: linear-gradient(135deg, #B9FBC0 0%, #A8E063 50%, #ffffff 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  color: transparent;
-  font-weight: 800;
+
+/* Cursive accent without italics */
+.cursive-text {
+  font-family: var(--cursive);
+  font-style: normal !important;
+  font-weight: 400;
+  font-size: 1.25em;
   display: inline-block;
+  margin-left: 5px;
+  vertical-align: baseline;
+}
+
+/* Default headings — solid forest for others */
+h1, h2, h3, h4 { color: var(--forest); }
+
+/* Clean up old gradient classes */
+.gradient-text, .gradient-text-light, .gradient-text-accent {
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+  -webkit-text-fill-color: initial !important;
+  color: inherit !important;
 }
 h1 { font-size: clamp(3rem, 8vw, 7rem); }
 h2 { font-size: clamp(2rem, 4.5vw, 3.8rem); line-height: 1.2; }
