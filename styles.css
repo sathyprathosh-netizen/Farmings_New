@@ -42,9 +42,9 @@ ul { list-style: none; }
 /* ── TYPOGRAPHY ── */
 h1, h2, h3, h4 { font-family: var(--serif); font-weight: 600; line-height: 1.15; }
 
-/* ── VIBRANT GREEN GRADIENT (Smarter Together Style) ── */
+/* ── VIBRANT GREEN GRADIENT (Ultra-Vivid Edition) ── */
 .vibrant-gradient {
-  background: linear-gradient(90deg, #A8E063 0%, #56AB2F 45%, #10B981 100%);
+  background: linear-gradient(90deg, #A8E063 0%, #10B981 50%, #059669 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -53,32 +53,29 @@ h1, h2, h3, h4 { font-family: var(--serif); font-weight: 600; line-height: 1.15;
   display: inline-block;
 }
 
-/* Cursive Eyebrows / Taglines */
+/* Elegant Cursive Taglines (Dancing Script) */
 .eyebrow, .hero-kicker, .hero-tagline, .logo-sub {
   font-family: var(--cursive) !important;
   font-style: normal !important;
-  font-weight: 400 !important;
-  font-size: 1.5rem !important;
+  font-weight: 600 !important;
+  font-size: 1.6rem !important;
   color: var(--vibrant-green);
-  letter-spacing: 0.02em;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
   margin-bottom: 0.5rem;
   display: block;
 }
 
-/* Uniform serif font for all h1, h2, h3 */
-h1, h2, h3, h4 {
-  font-family: var(--serif);
-  font-weight: 800;
+/* Attractive Uniform font (Poppins) for all h1, h2, h3 */
+h1, h2, h3, h4, .logo-name {
+  font-family: var(--sans) !important;
+  font-weight: 800 !important;
   font-style: normal !important;
+  letter-spacing: -0.02em !important;
 }
 
-/* Cursive utility (fallback or specific use) */
-.cursive-text {
-  font-family: var(--cursive);
-  font-style: normal !important;
-  font-weight: 400;
-  font-size: 1.1em;
-}
+/* Default headings fallback */
+h1, h2, h3, h4 { color: var(--forest); }
 h1 { font-size: clamp(3rem, 8vw, 7rem); }
 h2 { font-size: clamp(2rem, 4.5vw, 3.8rem); line-height: 1.2; }
 h3 { font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 500; }
