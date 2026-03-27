@@ -363,22 +363,22 @@ em { font-style: italic; color: var(--gold); }
 /* Curved SVG arc underline on nav links */
 .nav-link svg.nav-arc {
   position: absolute;
-  bottom: -8px;
+  bottom: -4px;
   left: 50%;
   transform: translateX(-50%);
-  width: 120%;
-  height: 10px;
+  width: 110%;
+  height: 8px;
   pointer-events: none;
   overflow: visible;
 }
 .nav-link svg.nav-arc path {
   fill: none;
   stroke: var(--vibrant-green);
-  stroke-width: 2.5;
+  stroke-width: 2;
   stroke-linecap: round;
   stroke-dasharray: 200;
   stroke-dashoffset: 200;
-  transition: stroke-dashoffset 0.5s cubic-bezier(0.16,1,0.3,1);
+  transition: stroke-dashoffset 0.4s cubic-bezier(0.16,1,0.3,1);
 }
 .nav-link:hover svg.nav-arc path {
   stroke-dashoffset: 0;
@@ -1101,20 +1101,20 @@ em { font-style: italic; color: var(--gold); }
 }
 
 .founder-blob-img {
-  width: 85%;
-  height: 85%;
+  width: 82%;
+  height: 78%;
   background: url("images/founder-raw.png") top center/cover;
-  border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+  border-radius: 42% 58% 68% 32% / 45% 45% 65% 55%;
   transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
   animation: morph 8s ease-in-out infinite alternate;
   box-shadow: 0 20px 50px rgba(15, 61, 46, 0.2);
   opacity: 0;
-  transform: scale(0.8) translateY(40px);
+  transform: scale(0.8) translateY(40px) translateX(-30px);
 }
 
 .founder-blob-img.in-view {
   opacity: 1;
-  transform: scale(1) translateY(0);
+  transform: scale(1) translateY(0) translateX(-30px);
 }
 
 @keyframes morph {
@@ -3377,3 +3377,20 @@ blockquote {
   50%       { opacity: 0.65; filter: drop-shadow(0 0 18px rgba(2,139,34,0.9)); }
 }
 
+/* Footer Harvest Title Hover Effect */
+.footer-harvest-title {
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  display: inline-block;
+}
+
+.footer-harvest-title:hover {
+  text-shadow: 0 0 15px rgba(2, 139, 34, 0.8), 0 0 30px rgba(2,139,34,0.4);
+  transform: scale(1.05);
+  letter-spacing: 0.05em;
+}
+
+.footer-harvest-title:hover .text-vibrant {
+  color: #a5d6a7 !important;
+}
