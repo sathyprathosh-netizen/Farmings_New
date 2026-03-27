@@ -162,7 +162,67 @@
   }, { threshold: 0.4 });
   document.querySelectorAll('.stat[data-count]').forEach(el => ioStats.observe(el));
 
-  /* ─── 3D CARD TILT (Alevior) ─── */
+  /* ─── INTRO CAROUSEL ─── */
+  const introTrack = document.getElementById('introTrack');
+  const introSlides = document.querySelectorAll('.intro-differ-section .carousel-slide');
+  const introDots = document.getElementById('introDots');
+  let introIdx = 0;
+  let introInterval;
+
+  function updateIntro() {
+    introTrack.style.transform = `translateX(-${introIdx * 100}%)`;
+    document.querySelectorAll('#introDots .dot').forEach((d, i) => {
+      d.classList.toggle('active', i === introIdx);
+    });
+  }
+
+  function nextIntro() {
+    introIdx = (introIdx + 1) % introSlides.length;
+    updateIntro();
+  }
+
+  function startIntroAuto() {
+    introInterval = setInterval(nextIntro, 6000);
+  }
+
+  if (introTrack) {
+    startIntroAuto();
+    document.getElementById('introNext')?.addEventListener('click', () => {
+      nextIntro();
+      clearInterval(introInterval);
+      startIntroAuto();
+    });
+    document.getElementById('introPrev')?.addEventListener('click', () => {
+      introIdx = (introIdx - 1 + introSlides.length) % introSlides.length;
+      updateIntro();
+      clearInterval(introInterval);
+      startIntroAuto();
+    });
+    document.querySelectorAll('#introDots .dot').forEach(dot => {
+      dot.addEventListener('click', function() {
+        introIdx = parseInt(this.dataset.index);
+        updateIntro();
+        clearInterval(introInterval);
+        startIntroAuto();
+      });
+    });
+  }
+
+  /* ─── GLOBAL PARALLAX ─── */
+  window.addEventListener('scroll', () => {
+    document.querySelectorAll('.parallax-section').forEach(section => {
+      const img = section.querySelector('.parallax-img');
+      const rect = section.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        // Center-relative parallax: image is centered when section is centered in viewport
+        const sectionCenter = rect.top + rect.height / 2;
+        const viewportCenter = window.innerHeight / 2;
+        const speed = 0.30;
+        const yPos = (sectionCenter - viewportCenter) * speed;
+        img.style.transform = `translateY(${yPos}px)`;
+      }
+    });
+  });
   document.querySelectorAll('.alevior-card[data-tilt]').forEach(card => {
     card.addEventListener('mousemove', (e) => {
       const rect = card.getBoundingClientRect();
@@ -178,10 +238,26 @@
   });
 
   /* ─── COCONUT INTERACTIONS (removed) ─── */
-  /* ─── NAV link active style injection ─── */
+  /* ─── KINETIC QUOTE OBSERVER ─── */
+  const kqEl = document.getElementById('founderQuote');
+  if (kqEl) {
+    const kqObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('kq-visible');
+          kqObserver.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.35 });
+    kqObserver.observe(kqEl);
+  }
+
+  /* ─── NAV link active arc style injection ─── */
   const style = document.createElement('style');
-  style.textContent = `.nav-link.active { color: var(--gold) !important; }
-  .nav-link.active::after { width: 100% !important; }`;
+  style.textContent = `
+    .nav-link.active { color: var(--gold) !important; }
+    .nav-link.active svg.nav-arc path { stroke-dashoffset: 0 !important; }
+  `;
   document.head.appendChild(style);
 
   /* ─── LEAF SCATTER on CTA button ─── */
@@ -230,5 +306,106 @@
   /* ─── INITIAL CALL ─── */
   updateScrollParallax();
   updateActiveNav();
+
+  /* ─── BUTTON CLICK: CONFETTI BLAST & RIPPLE ─── */
+  document.querySelectorAll('.btn-primary, .btn-ghost, .nav-cta, .nav-link, button, .mobile-links a').forEach(button => {
+    button.addEventListener('click', function (e) {
+      // 1. Confetti Blast (Paper Blast)
+      const isCarouselControl = this.closest('.intro-nav-controls') || this.id === 'introNext' || this.id === 'introPrev' || this.classList.contains('intro-prev') || this.classList.contains('intro-next') || this.classList.contains('dot');
+      if (typeof confetti === 'function' && !isCarouselControl) {
+        confetti({
+          particleCount: 150,
+          spread: 80,
+          origin: { y: 0.7 },
+          colors: ['#028B22', '#0F3D2E', '#ffffff'],
+          ticks: 200,
+          gravity: 1.2,
+          scalar: 1.2,
+          shapes: ['circle', 'square']
+        });
+      }
+
+      // 2. Ripple effect
+      let rect = this.getBoundingClientRect();
+      let x = e.clientX - rect.left;
+      let y = e.clientY - rect.top;
+      
+      let ripple = document.createElement('span');
+      ripple.className = 'ripple';
+      ripple.style.left = x + 'px';
+      ripple.style.top = y + 'px';
+      this.appendChild(ripple);
+      setTimeout(() => { ripple.remove(); }, 700);
+      
+      // 3. Optional Leaf Scatter for specific buttons
+      if (this.id === 'ctaButton' || this.closest('.cta-section')) {
+        if (window.scatterLeaves) window.scatterLeaves();
+      }
+
+      // 4. Handle Link Delay for external navigations
+      const href = this.getAttribute('href');
+      if (href && !href.startsWith('#') && !this.classList.contains('no-delay')) {
+        e.preventDefault();
+        setTimeout(() => {
+          window.location.href = href;
+        }, 800); // Wait for the blast to be visible
+      }
+    });
+  });
+
+  /* ─── SCROLL REVEAL OBSERVER (anim-slide-up / anim-fade-up) ─── */
+  const animEls = document.querySelectorAll('.anim-slide-up, .anim-fade-up, .initiative-card, .job-card, .profile-card, .alevior-card, .founder-blob-img, .process-text, .reveal-text');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+      if (entry.isIntersecting) {
+        // Add a slight staggered delay based on visibility order
+        setTimeout(() => {
+          entry.target.classList.add('in-view');
+        }, index * 100); 
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+  animEls.forEach(el => revealObserver.observe(el));
+
+  /* ─── PREMIUM CURSOR: DOT + LAGGING RING ─── */
+  (function () {
+    const dot  = document.getElementById('cursorDot');
+    const ring = document.getElementById('cursorRing');
+    if (!dot || !ring) return;
+
+    let mx = -200, my = -200;  // mouse position
+    let rx = -200, ry = -200;  // ring position (lagged)
+
+    document.addEventListener('mousemove', (e) => {
+      mx = e.clientX;
+      my = e.clientY;
+
+      // Dot follows instantly
+      dot.style.left = mx + 'px';
+      dot.style.top  = my + 'px';
+    });
+
+    // Hover state on interactive elements
+    const interactables = document.querySelectorAll('a, button, .harvest-card, .vm-card, .alevior-card, .initiative-card, .job-card, input, textarea, label');
+    interactables.forEach(el => {
+      el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+      el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+    });
+
+    // Ring lags behind via lerp
+    function lerp(a, b, t) { return a + (b - a) * t; }
+
+    function animateRing() {
+      rx = lerp(rx, mx, 0.1);
+      ry = lerp(ry, my, 0.1);
+      ring.style.left = rx + 'px';
+      ring.style.top  = ry + 'px';
+      requestAnimationFrame(animateRing);
+    }
+
+    requestAnimationFrame(animateRing);
+  })();
 
 })();
