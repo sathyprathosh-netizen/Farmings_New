@@ -68,27 +68,42 @@
     <div class="parallax-container">
       <!-- Layer 1: Sky gradient -->
       <div class="parallax-layer layer-sky" data-depth="0.1">
-        <div class="sky-gradient"></div>
-        <div class="light-rays">
-          <div class="ray ray-1"></div>
-          <div class="ray ray-2"></div>
-          <div class="ray ray-3"></div>
+        <div class="parallax-inner">
+          <div class="sky-gradient"></div>
+          <div class="light-rays">
+            <div class="ray ray-1"></div>
+            <div class="ray ray-2"></div>
+            <div class="ray ray-3"></div>
+          </div>
         </div>
       </div>
 
       <!-- Layer 2: Background image (mountains/landscape) -->
-      <div class="parallax-layer layer-bg" data-depth="0.2">
-        <div class="hero-bg-image"></div>
+      <div class="parallax-layer layer-bg" data-depth="0.3">
+        <div class="parallax-inner">
+          <div class="hero-bg-image"></div>
+        </div>
       </div>
 
-      <!-- Layer 3: Mid coconut trees (removed) -->
-      <div class="parallax-layer layer-mid" data-depth="0.4">
+      <!-- Layer 3: Mid depth elements (Coconuts/Trees) -->
+      <div class="parallax-layer layer-mid" data-depth="0.6">
+        <div class="parallax-inner">
+           <!-- Added mid-ground trees to create depth -->
+           <div class="tree-group tree-left tree-sway">
+             <img src="images/tamil_harvest_raw.png" style="width: 100%; height: auto; position: absolute; bottom: -10%; opacity: 0.6; filter: blur(2px);">
+           </div>
+           <div class="tree-group tree-right tree-sway-r">
+             <img src="images/tamil_harvest_raw.png" style="width: 100%; height: auto; position: absolute; bottom: -10%; opacity: 0.6; filter: blur(2px); transform: scaleX(-1);">
+           </div>
+        </div>
       </div>
 
       <!-- Layer 4: Foreground grass/leaves -->
-      <div class="parallax-layer layer-fg" data-depth="0.8">
-        <div class="fg-leaves-left"></div>
-        <div class="fg-leaves-right"></div>
+      <div class="parallax-layer layer-fg" data-depth="1.2">
+        <div class="parallax-inner">
+          <div class="fg-leaves-left"></div>
+          <div class="fg-leaves-right"></div>
+        </div>
       </div>
 
       <!-- Pollen particles -->
@@ -100,10 +115,10 @@
 
     <!-- Hero Text Content -->
     <div class="hero-content">
-      <h1 class="hero-title reveal-text delay-1" style="margin-top: 2rem; color: #028B22; background: none; -webkit-text-fill-color: initial;">
+      <h1 class="hero-title reveal-text delay-1">
         VetriVel Farms
       </h1>
-      <p class="hero-tagline reveal-text delay-2" style="color: #fff;">From Earth to Life</p>
+      <p class="hero-tagline reveal-text delay-2">From Earth to Life</p>
       
     </div>
   </section><!-- end hero -->
@@ -176,45 +191,45 @@
       
       <!-- Vision Row -->
       <div class="story-row anim-fade-up">
-        <div class="story-icon-wrap" style="width: 100%; height: 400px; display: flex; align-items: center; justify-content: center;">
-          <!-- Custom Premium Doodle Art for Vision -->
-          <svg viewBox="0 0 500 500" style="width: 320px; height: 320px; color: #028B22;">
-            <circle cx="250" cy="250" r="150" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="10 10" />
-            <path d="M150,250 Q250,50 350,250 Q250,450 150,250 Z" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" />
-            <circle cx="250" cy="250" r="50" fill="currentColor" opacity="0.1" />
-            <circle cx="250" cy="250" r="20" fill="currentColor" />
-            <path d="M100,100 L150,150 M400,100 L350,150 M100,400 L150,350 M400,400 L350,350" stroke="currentColor" stroke-width="2" />
-          </svg>
+        <div class="story-canvas">
+          <img src="doodle/Gemini_Generated_Image_6h4r976h4r976h4r.png" alt="VetriVel Vision" class="canvas-main-img">
+          <!-- Premium Doodle Decoration -->
+          <div class="canvas-doodle-overlay">
+            <svg viewBox="0 0 400 400" style="width: 100%; height: 100%; opacity: 0.15;">
+              <path d="M50,100 Q150,50 250,100 T350,150" fill="none" stroke="#028B22" stroke-width="2" stroke-dasharray="8 8" />
+              <circle cx="300" cy="100" r="20" fill="none" stroke="#028B22" stroke-width="1" />
+            </svg>
+          </div>
         </div>
         <div class="story-text">
-          <div class="story-eyebrow" style="text-transform: uppercase;">
+          <div class="story-eyebrow">
             <span class="material-symbols-outlined">visibility</span>
             FUTURE-FORWARD
           </div>
-          <h2 style="font-family: var(--sans); font-weight: 900; font-size: 4.5rem; margin-bottom: 1.5rem;">Our <span class="highlight-word">Vision</span></h2>
-          <p class="hero-quote" style="font-size: 1.6rem; color: #444; line-height: 1.6; font-weight: 300; font-style: italic;">"I envision a future where technology and tradition coexist, creating a world where AI solves global challenges while spiritual craftsmanship and ethical agriculture sustain human wellbeing."</p>
+          <h2>Our <span class="highlight-word">Vision</span></h2>
+          <p class="hero-quote">"I envision a future where technology and tradition coexist, creating a world where AI solves global challenges while spiritual craftsmanship and ethical agriculture sustain human wellbeing."</p>
         </div>
       </div>
 
       <!-- Mission Row -->
       <div class="story-row reversed anim-fade-up" style="animation-delay: 0.3s;">
         <div class="story-text">
-          <div class="story-eyebrow" style="text-transform: uppercase;">
+          <div class="story-eyebrow">
             <span class="material-symbols-outlined">rocket_launch</span>
             ACTION-ORIENTED
           </div>
-          <h2 style="font-family: var(--sans); font-weight: 900; font-size: 4.5rem; margin-bottom: 1.5rem;">Our <span class="highlight-word">Mission</span></h2>
-          <p class="hero-quote" style="font-size: 1.6rem; color: #444; line-height: 1.6; font-weight: 300; font-style: italic;">"To build a self-reliant ecosystem that inspires youth, strengthens industries, and uplifts communities through innovation, spirituality, and purpose-driven leadership."</p>
+          <h2>Our <span class="highlight-word">Mission</span></h2>
+          <p class="hero-quote">"To build a self-reliant ecosystem that inspires youth, strengthens industries, and uplifts communities through innovation, spirituality, and purpose-driven leadership."</p>
         </div>
-        <div class="story-icon-wrap" style="width: 100%; height: 400px; display: flex; align-items: center; justify-content: center;">
-          <!-- Custom Premium Doodle Art for Mission -->
-          <svg viewBox="0 0 500 500" style="width: 320px; height: 320px; color: #028B22;">
-            <path d="M250,450 L250,100 L300,150 M250,100 L200,150" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" />
-            <path d="M150,400 Q250,350 350,400" fill="none" stroke="currentColor" stroke-width="2" />
-            <path d="M100,430 L400,430" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="8 8" />
-            <path d="M200,200 L150,150 M300,200 L350,150" stroke="currentColor" stroke-width="3" />
-            <circle cx="250" cy="250" r="120" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="15 15" opacity="0.3" />
-          </svg>
+        <div class="story-canvas">
+          <img src="doodle/Gemini_Generated_Image_9fihcv9fihcv9fih.png" alt="VetriVel Mission" class="canvas-main-img">
+          <!-- Premium Doodle Decoration -->
+          <div class="canvas-doodle-overlay">
+            <svg viewBox="0 0 400 400" style="width: 100%; height: 100%; opacity: 0.15;">
+              <circle cx="100" cy="300" r="40" fill="none" stroke="#028B22" stroke-width="1" stroke-dasharray="10 5" />
+              <path d="M300,100 L350,150 M350,100 L300,150" stroke="#028B22" stroke-width="2" />
+            </svg>
+          </div>
         </div>
       </div>
 
@@ -261,11 +276,11 @@
   ═══════════════════════════════════════════ -->
   <section id="initiatives" class="sustainability-section" style="position: relative; padding: 10rem 5%; overflow: hidden;">
     <!-- Video Background -->
-    <video autoplay loop muted playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; opacity: 0.4; pointer-events: none; filter: brightness(0.7);">
+    <video autoplay loop muted playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; opacity: 0.5; pointer-events: none; filter: brightness(0.6) blur(2px);">
       <source src="videos/Untitled design (1).mp4" type="video/mp4">
     </video>
     <!-- Solid Green Theme Overlay -->
-    <div style="position: absolute; inset: 0; background: #028B22; opacity: 0.55; z-index: 1; pointer-events: none;"></div>
+    <div style="position: absolute; inset: 0; background: #028B22; opacity: 0.85; z-index: 1; pointer-events: none;"></div>
     
     <div class="sustain-inner" style="position: relative; z-index: 2;">
       <div class="section-header centered anim-fade-up">
@@ -475,10 +490,9 @@
 
     <div class="roots-marquee-container">
       <div class="roots-marquee-track">
-        <!-- Slide 1: Strategic Supply -->
-        <div class="premium-card">
-          <div class="card-image" style="background-image: url('images/tamil_harvest_raw_new.png');"></div>
-          <div class="card-content">
+        <div class="premium-card" style="border-radius: 30px !important; overflow: hidden !important; clip-path: inset(0 round 30px) !important;">
+          <div class="card-image" style="background-image: url('images/tamil_harvest_raw_new.png'); border-radius: 30px 30px 0 0 !important; clip-path: inset(0 0 0 0 round 30px 30px 0 0) !important;"></div>
+          <div class="card-content" style="border-radius: 0 0 30px 30px !important; clip-path: inset(0 0 0 0 round 0 0 30px 30px) !important;">
             <p class="eyebrow" style="color: #028B22;">STRATEGIC SUPPLY</p>
             <h3 class="highlight-title">
               Strategic Global Delivery
@@ -490,9 +504,9 @@
         </div>
 
         <!-- Slide 2: Coconut Harvesting -->
-        <div class="premium-card">
-          <div class="card-image" style="background-image: url('images/coconut_climb_new.jpg');"></div>
-          <div class="card-content">
+        <div class="premium-card" style="border-radius: 30px !important; overflow: hidden !important; clip-path: inset(0 round 30px) !important;">
+          <div class="card-image" style="background-image: url('images/coconut_climb_new.jpg'); border-radius: 30px 30px 0 0 !important; clip-path: inset(0 0 0 0 round 30px 30px 0 0) !important;"></div>
+          <div class="card-content" style="border-radius: 0 0 30px 30px !important; clip-path: inset(0 0 0 0 round 0 0 30px 30px) !important;">
             <p class="eyebrow" style="color: #028B22;">COCONUT HARVESTING</p>
             <h3 class="highlight-title">
               The Harvest Cycle
@@ -504,9 +518,9 @@
         </div>
 
         <!-- Slide 3: Traditional Processing -->
-        <div class="premium-card">
-          <div class="card-image" style="background-image: url('images/tamil_peeling_raw_new.png');"></div>
-          <div class="card-content">
+        <div class="premium-card" style="border-radius: 30px !important; overflow: hidden !important; clip-path: inset(0 round 30px) !important;">
+          <div class="card-image" style="background-image: url('images/tamil_peeling_raw_new.png'); border-radius: 30px 30px 0 0 !important; clip-path: inset(0 0 0 0 round 30px 30px 0 0) !important;"></div>
+          <div class="card-content" style="border-radius: 0 0 30px 30px !important; clip-path: inset(0 0 0 0 round 0 0 30px 30px) !important;">
             <p class="eyebrow" style="color: #028B22;">COCONUT PEELING</p>
             <h3 class="highlight-title">
               Traditional Processing
@@ -518,9 +532,9 @@
         </div>
 
         <!-- Slide 4: Quality Assurance -->
-        <div class="premium-card">
-          <div class="card-image" style="background-image: url('images/coconut_harvest_new.jpg');"></div>
-          <div class="card-content">
+        <div class="premium-card" style="border-radius: 30px !important; overflow: hidden !important; clip-path: inset(0 round 30px) !important;">
+          <div class="card-image" style="background-image: url('images/coconut_harvest_new.jpg'); border-radius: 30px 30px 0 0 !important; clip-path: inset(0 0 0 0 round 30px 30px 0 0) !important;"></div>
+          <div class="card-content" style="border-radius: 0 0 30px 30px !important; clip-path: inset(0 0 0 0 round 0 0 30px 30px) !important;">
             <p class="eyebrow" style="color: #028B22;">QUALITY ASSURANCE</p>
             <h3 class="highlight-title">
               Precision Extraction
@@ -532,9 +546,9 @@
         </div>
 
         <!-- Slide 5: Sustainable Logistics -->
-        <div class="premium-card">
-          <div class="card-image" style="background-image: url('images/coconut_processing_new.jpg');"></div>
-          <div class="card-content">
+        <div class="premium-card" style="border-radius: 30px !important; overflow: hidden !important; clip-path: inset(0 round 30px) !important;">
+          <div class="card-image" style="background-image: url('images/strategic_supply.png'); border-radius: 30px 30px 0 0 !important; clip-path: inset(0 0 0 0 round 30px 30px 0 0) !important;"></div>
+          <div class="card-content" style="border-radius: 0 0 30px 30px !important; clip-path: inset(0 0 0 0 round 0 0 30px 30px) !important;">
             <p class="eyebrow" style="color: #028B22;">LOGISTICS</p>
             <h3 class="highlight-title">
               Eco-Smart Delivery
@@ -546,9 +560,9 @@
         </div>
 
         <!-- DUPLICATE SET FOR INFINITE LOOP -->
-        <div class="premium-card" aria-hidden="true">
-          <div class="card-image" style="background-image: url('images/tamil_harvest_raw_new.png');"></div>
-          <div class="card-content">
+        <div class="premium-card" aria-hidden="true" style="border-radius: 30px !important; overflow: hidden !important; clip-path: inset(0 round 30px) !important;">
+          <div class="card-image" style="background-image: url('images/tamil_harvest_raw_new.png'); border-radius: 30px 30px 0 0 !important; clip-path: inset(0 0 0 0 round 30px 30px 0 0) !important;"></div>
+          <div class="card-content" style="border-radius: 0 0 30px 30px !important; clip-path: inset(0 0 0 0 round 0 0 30px 30px) !important;">
             <p class="eyebrow">STRATEGIC SUPPLY</p>
             <h3 class="highlight-title">
               Strategic Global Delivery
@@ -558,9 +572,9 @@
             <div class="bottom-dash"></div>
           </div>
         </div>
-        <div class="premium-card" aria-hidden="true">
-          <div class="card-image" style="background-image: url('images/coconut_climb_new.jpg');"></div>
-          <div class="card-content">
+        <div class="premium-card" aria-hidden="true" style="border-radius: 30px !important; overflow: hidden !important; clip-path: inset(0 round 30px) !important;">
+          <div class="card-image" style="background-image: url('images/coconut_climb_new.jpg'); border-radius: 30px 30px 0 0 !important; clip-path: inset(0 0 0 0 round 30px 30px 0 0) !important;"></div>
+          <div class="card-content" style="border-radius: 0 0 30px 30px !important; clip-path: inset(0 0 0 0 round 0 0 30px 30px) !important;">
             <p class="eyebrow">COCONUT HARVESTING</p>
             <h3 class="highlight-title">
               The Harvest Cycle
@@ -570,9 +584,9 @@
             <div class="bottom-dash"></div>
           </div>
         </div>
-        <div class="premium-card" aria-hidden="true">
-          <div class="card-image" style="background-image: url('images/tamil_peeling_raw_new.png');"></div>
-          <div class="card-content">
+        <div class="premium-card" aria-hidden="true" style="border-radius: 30px !important; overflow: hidden !important; clip-path: inset(0 round 30px) !important;">
+          <div class="card-image" style="background-image: url('images/tamil_peeling_raw_new.png'); border-radius: 30px 30px 0 0 !important; clip-path: inset(0 0 0 0 round 30px 30px 0 0) !important;"></div>
+          <div class="card-content" style="border-radius: 0 0 30px 30px !important; clip-path: inset(0 0 0 0 round 0 0 30px 30px) !important;">
             <p class="eyebrow">COCONUT PEELING</p>
             <h3 class="highlight-title">
               Traditional Processing
@@ -582,9 +596,9 @@
             <div class="bottom-dash"></div>
           </div>
         </div>
-        <div class="premium-card" aria-hidden="true">
-          <div class="card-image" style="background-image: url('images/coconut_harvest_new.jpg');"></div>
-          <div class="card-content">
+        <div class="premium-card" aria-hidden="true" style="border-radius: 30px !important; overflow: hidden !important; clip-path: inset(0 round 30px) !important;">
+          <div class="card-image" style="background-image: url('images/coconut_harvest_new.jpg'); border-radius: 30px 30px 0 0 !important; clip-path: inset(0 0 0 0 round 30px 30px 0 0) !important;"></div>
+          <div class="card-content" style="border-radius: 0 0 30px 30px !important; clip-path: inset(0 0 0 0 round 0 0 30px 30px) !important;">
             <p class="eyebrow">QUALITY ASSURANCE</p>
             <h3 class="highlight-title">
               Precision Extraction
@@ -594,9 +608,9 @@
             <div class="bottom-dash"></div>
           </div>
         </div>
-        <div class="premium-card" aria-hidden="true">
-          <div class="card-image" style="background-image: url('images/coconut_processing_new.jpg');"></div>
-          <div class="card-content">
+        <div class="premium-card" aria-hidden="true" style="border-radius: 30px !important; overflow: hidden !important; clip-path: inset(0 round 30px) !important;">
+          <div class="card-image" style="background-image: url('images/strategic_supply.png'); border-radius: 30px 30px 0 0 !important; clip-path: inset(0 0 0 0 round 30px 30px 0 0) !important;"></div>
+          <div class="card-content" style="border-radius: 0 0 30px 30px !important; clip-path: inset(0 0 0 0 round 0 0 30px 30px) !important;">
             <p class="eyebrow">LOGISTICS</p>
             <h3 class="highlight-title">
               Eco-Smart Delivery

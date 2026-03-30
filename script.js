@@ -27,41 +27,49 @@
 
   /* ─── PARALLAX layers (mouse + scroll) ─── */
   const parallaxLayers = document.querySelectorAll('.parallax-layer[data-depth]');
+  const parallaxInners = document.querySelectorAll('.parallax-inner');
 
-  // Mouse parallax (hero only)
+  // Mouse parallax (Targets the inner wrap for a subtle reactive tilt)
   document.addEventListener('mousemove', (e) => {
     const cx = window.innerWidth / 2;
     const cy = window.innerHeight / 2;
     const dx = (e.clientX - cx) / cx;
     const dy = (e.clientY - cy) / cy;
-    parallaxLayers.forEach(layer => {
-      const depth = parseFloat(layer.dataset.depth);
-      const tx = dx * depth * 18;
-      const ty = dy * depth * 12;
-      layer.style.transform = `translate(${tx}px, ${ty}px)`;
+    
+    parallaxInners.forEach((inner, i) => {
+      const depth = parseFloat(parallaxLayers[i].dataset.depth) || 0.2;
+      const tx = dx * depth * 25;
+      const ty = dy * depth * 15;
+      inner.style.transform = `translate3d(${tx}px, ${ty}px, 0)`;
     });
   });
 
-  // Scroll parallax — depth-based translateY
+  // Scroll parallax (Targets the outer layer for vertical movement)
+  let scrollTicking = false;
   function updateScrollParallax() {
     const scrollY = window.scrollY;
+    
+    // Performance gate: Only run if Hero is in view
+    if (scrollY > window.innerHeight * 1.5) {
+        scrollTicking = false;
+        return;
+    }
+
     parallaxLayers.forEach(layer => {
       const depth = parseFloat(layer.dataset.depth);
-      const ty = scrollY * depth * 0.35;
-      layer.style.transform = `translateY(${ty}px)`;
+      const ty = scrollY * depth * 0.45;
+      layer.style.transform = `translate3d(0, ${ty}px, 0)`;
     });
-
-    // Plantation bg slow zoom-parallax
-    const plantBg = document.querySelector('.plantation-bg');
-    if (plantBg) {
-      const section = plantBg.closest('.plantation-section');
-      const rect = section.getBoundingClientRect();
-      const offset = -rect.top * 0.12;
-      plantBg.style.transform = `translateY(${offset}px) scale(1.05)`;
-    }
+    
+    scrollTicking = false;
   }
 
-  window.addEventListener('scroll', updateScrollParallax, { passive: true });
+  window.addEventListener('scroll', () => {
+    if (!scrollTicking) {
+      window.requestAnimationFrame(updateScrollParallax);
+      scrollTicking = true;
+    }
+  }, { passive: true });
 
   /* ─── POLLEN particles ─── */
   const pollenContainer = document.getElementById('pollenContainer');
