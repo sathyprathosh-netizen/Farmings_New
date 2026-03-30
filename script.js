@@ -15,10 +15,14 @@
   const hamburger = document.getElementById('hamburger');
   const mobileMenu = document.getElementById('mobileMenu');
   hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
     mobileMenu.classList.toggle('open');
   });
   mobileMenu.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => mobileMenu.classList.remove('open'));
+    a.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+    });
   });
 
   /* ─── PARALLAX layers (mouse + scroll) ─── */
@@ -208,21 +212,37 @@
     });
   }
 
-  /* ─── GLOBAL PARALLAX ─── */
-  window.addEventListener('scroll', () => {
+  /* ─── GLOBAL PARALLAX (Optimized for Mobile/High Refresh) ─── */
+  let parallaxTicking = false;
+  function performParallax() {
+    const isMobile = window.innerWidth < 768;
+    const speed = isMobile ? 0.15 : 0.28; // Subtler on mobile to avoid jitter
+
     document.querySelectorAll('.parallax-section').forEach(section => {
       const img = section.querySelector('.parallax-img');
+      if (!img) return;
+
       const rect = section.getBoundingClientRect();
-      if (rect.top < window.innerHeight && rect.bottom > 0) {
-        // Center-relative parallax: image is centered when section is centered in viewport
+      const viewportHeight = window.innerHeight;
+
+      if (rect.top < viewportHeight && rect.bottom > 0) {
         const sectionCenter = rect.top + rect.height / 2;
-        const viewportCenter = window.innerHeight / 2;
-        const speed = 0.30;
+        const viewportCenter = viewportHeight / 2;
         const yPos = (sectionCenter - viewportCenter) * speed;
-        img.style.transform = `translateY(${yPos}px)`;
+        
+        // Use translate3d for hardware acceleration
+        img.style.transform = `translate3d(0, ${yPos}px, 0)`;
       }
     });
-  });
+    parallaxTicking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!parallaxTicking) {
+      window.requestAnimationFrame(performParallax);
+      parallaxTicking = true;
+    }
+  }, { passive: true });
   document.querySelectorAll('.alevior-card[data-tilt]').forEach(card => {
     card.addEventListener('mousemove', (e) => {
       const rect = card.getBoundingClientRect();
@@ -355,57 +375,18 @@
 
   /* ─── SCROLL REVEAL OBSERVER (anim-slide-up / anim-fade-up) ─── */
   const animEls = document.querySelectorAll('.anim-slide-up, .anim-fade-up, .initiative-card, .job-card, .profile-card, .alevior-card, .founder-blob-img, .process-text, .reveal-text');
+  const revealThreshold = window.innerWidth < 768 ? 0.05 : 0.15;
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry, index) => {
       if (entry.isIntersecting) {
-        // Add a slight staggered delay based on visibility order
         setTimeout(() => {
           entry.target.classList.add('in-view');
-        }, index * 100); 
+        }, index * 80); 
         revealObserver.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+  }, { threshold: revealThreshold, rootMargin: '0px 0px -20px 0px' });
 
   animEls.forEach(el => revealObserver.observe(el));
-
-  /* ─── PREMIUM CURSOR: DOT + LAGGING RING ─── */
-  (function () {
-    const dot  = document.getElementById('cursorDot');
-    const ring = document.getElementById('cursorRing');
-    if (!dot || !ring) return;
-
-    let mx = -200, my = -200;  // mouse position
-    let rx = -200, ry = -200;  // ring position (lagged)
-
-    document.addEventListener('mousemove', (e) => {
-      mx = e.clientX;
-      my = e.clientY;
-
-      // Dot follows instantly
-      dot.style.left = mx + 'px';
-      dot.style.top  = my + 'px';
-    });
-
-    // Hover state on interactive elements
-    const interactables = document.querySelectorAll('a, button, .harvest-card, .vm-card, .alevior-card, .initiative-card, .job-card, input, textarea, label');
-    interactables.forEach(el => {
-      el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
-      el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
-    });
-
-    // Ring lags behind via lerp
-    function lerp(a, b, t) { return a + (b - a) * t; }
-
-    function animateRing() {
-      rx = lerp(rx, mx, 0.1);
-      ry = lerp(ry, my, 0.1);
-      ring.style.left = rx + 'px';
-      ring.style.top  = ry + 'px';
-      requestAnimationFrame(animateRing);
-    }
-
-    requestAnimationFrame(animateRing);
-  })();
 
 })();
