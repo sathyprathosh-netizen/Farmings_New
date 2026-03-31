@@ -236,10 +236,12 @@
       if (rect.top < viewportHeight && rect.bottom > 0) {
         const sectionCenter = rect.top + rect.height / 2;
         const viewportCenter = viewportHeight / 2;
-        const yPos = (sectionCenter - viewportCenter) * speed;
         
-        // Use translate3d for hardware acceleration
-        img.style.transform = `translate3d(0, ${yPos}px, 0)`;
+        // Inverted calculation for that cinematic "perfect" parallax depth
+        const yPos = (sectionCenter - viewportCenter) * -0.35; 
+        
+        // Use translate3d for hardware acceleration + scale for extra pop
+        img.style.transform = `translate3d(0, ${yPos}px, 0) scale(1.05)`;
       }
     });
     parallaxTicking = false;
