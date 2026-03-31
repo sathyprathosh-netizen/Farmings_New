@@ -2430,6 +2430,23 @@ blockquote {
 /* ════════════════════════════════
    SECTION 9 — CTA
 ════════════════════════════════ */
+.shimmer-link {
+  background: linear-gradient(to right, #ffffff 20%, var(--gold) 40%, var(--gold) 60%, #ffffff 80%);
+  background-size: 200% auto;
+  color: #ffffff;
+  background-clip: text;
+  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmerSweep 3s linear infinite;
+  display: inline-block;
+  font-weight: 700 !important;
+}
+
+@keyframes shimmerSweep {
+  to { background-position: 200% center; }
+}
+
 .cta-section {
   position: relative; padding: 8rem 2.5rem;
   background: var(--dark);
